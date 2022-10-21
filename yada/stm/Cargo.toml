@@ -1,0 +1,15 @@
+[package]
+name = "stm-yada"
+version = "0.1.0"
+authors = ["Felix Suchert <dev@felixsuchert.de>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+decorum = "0.3"
+num-traits = "0.2.11"
+clap = "2.33"
+cpu-time = "1.0"
+
+stm = { git = "https://github.com/feliix42/rust-stm" }
