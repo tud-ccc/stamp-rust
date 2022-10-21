@@ -1,0 +1,33 @@
+[package]
+name = "intruder"
+version = "0.1.0"
+authors = ["Felix Suchert <dev@felixsuchert.de>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand_chacha = "0.2"
+clap = { version = "2.32", optional = true }
+
+# use patched version of rust-stm
+stm = { git = "https://github.com/feliix42/rust-stm", optional = true } #, branch = "retry-count" }
+stm-datastructures = { git = "https://github.com/feliix42/stm-datastructures", optional = true }
+
+time = { version = "0.1", optional = true }
+cpu-time = { version = "1.0", optional = true }
+
+[features]
+cli = ["time", "clap", "cpu-time"]
+transactional = ["stm", "stm-datastructures"]
+
+[[bin]]
+name = "sequential"
+path = "src/bin/seq.rs"
+required-features = ["cli"]
+
+[[bin]]
+name = "stm"
+path = "src/bin/stm.rs"
+required-features = ["transactional", "cli"]
+
